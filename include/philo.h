@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/04/22 19:34:13 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:50:38 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {
-	int	*philosophers;
-	int	number_of_philosophers;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	philosopher_must_eat;
+	pthread_t		*philosopher;
+	pthread_mutex_t	*mutex;
+	int				number_of_philosophers;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				philosopher_must_eat;
 }	t_philo;
 
-int	ft_atoi(const char *str);
+//utils.c-------------------------------------------------------
+int		ft_atoi(const char *str);
+void	ft_free(t_philo *philo);
+void	*start_thread(void *philo);
 
 #endif
