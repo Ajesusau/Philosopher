@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/05 16:04:13 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:11:58 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	*start_thread(void *philo)
 {
-	static int	i;
-
-	i = 0;
+	static int i = 0;
 	if ((pthread_t) philo)
 		printf("Philo %d created\n", ++i);
 	sleep(3);
