@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   data.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:01 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/07 19:07:17 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:23:20 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,59 @@ int	check_arg(char **argv)
 	return (error);
 }
 
-int	init_data(char **argv, t_philo *philo)
+void	ini_philo(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philos)
+	{
+		data->philos[i].id = i + 1;
+		pthread_create
+			(&data->philos[i].thread, NULL, &start_philo, &data->philos[i]);
+		i++;
+	}
+}
+
+int	init_data(char **argv, t_data *data)
 {
 	int	i;
 	int	error;
 
 	i = 0;
 	error = check_arg(argv);
-	philo->num_of_philos = ft_atoll(argv[1]);
-	philo->time_to_die = ft_atoll(argv[2]);
-	philo->time_to_eat = ft_atoll(argv[3]);
-	philo->time_to_sleep = ft_atoll(argv[4]);
+	data->num_of_philos = ft_atoll(argv[1]);
+	data->time_to_die = ft_atoll(argv[2]);
+	data->time_to_eat = ft_atoll(argv[3]);
+	data->time_to_sleep = ft_atoll(argv[4]);
+	data->dead_flag = 0;
 	if (argv[5])
-		philo->philos_must_eat = ft_atoll(argv[5]);
+		data->philos_must_eat = ft_atoll(argv[5]);
 	else
-		philo->philos_must_eat = -1;
+		data->philos_must_eat = -1;
 	if (error == 0)
-	{
-		philo->philosopher = malloc(sizeof(pthread_t) * philo->num_of_philos);
-		while (i < philo->num_of_philos)
-			pthread_create(&philo->philosopher[i++], NULL, &start_philo, philo);
-	}
+		data->philos = malloc(sizeof(t_philo) * data->num_of_philos);
 	return (error);
 }
 
 int	main(int argc, char **argv)
 {
 	int		i;
-	t_philo	philo;
+	t_data	data;
 
 	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
-		if (init_data(argv, &philo))
+		if (init_data(argv, &data))
 			return (EXIT_FAILURE);
-		usleep(300);
-		printf("num_of_philos: %d\n", philo.num_of_philos);
-		printf("time_to_die: %d\n", philo.time_to_die);
-		printf("time_to_eat: %d\n", philo.time_to_eat);
-		printf("time_to_sleep: %d\n", philo.time_to_sleep);
-		printf("philosopher_must_eat: %d\n", philo.philos_must_eat);
-		ft_free(&philo);
+		printf("num_of_philos: %d\n", data.num_of_philos);
+		printf("time_to_die: %d\n", data.time_to_die);
+		printf("time_to_eat: %d\n", data.time_to_eat);
+		printf("time_to_sleep: %d\n", data.time_to_sleep);
+		printf("philosopher_must_eat: %d\n", data.philos_must_eat);
+		ini_philo(&data);
+		wait_for_philos(&data);
+		ft_free(&data);
 	}
 	else
 		printf("Error: Invalid argument count.\n");

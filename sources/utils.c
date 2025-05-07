@@ -6,25 +6,37 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/07 19:03:13 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:57:48 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*start_philo(void *philo)
+void	wait_for_philos(t_data *data)
 {
-	static int i = 0;
+	int	i;
 
-	if ((pthread_t) philo)
-		printf("Philo %d created\n", ++i);
+	i = 0;
+	while (i < data->num_of_philos)
+	{
+		pthread_join(data->philos[i].thread, NULL);
+		i++;
+	}
+}
+
+void	*start_philo(void *var)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *) var;
+	printf("Philo %d created\n", philo->id);
 	return (NULL);
 }
 
-void	ft_free(t_philo *philo)
+void	ft_free(t_data *data)
 {
-	if (philo->philosopher)
-		free (philo->philosopher);
+	if (data->philos)
+		free (data->philos);
 }
 
 long long	ft_atoll(const char *str)
