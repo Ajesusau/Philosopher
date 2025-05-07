@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/07 18:51:52 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:03:13 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_free(t_philo *philo)
 		free (philo->philosopher);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoll(const char *str)
 {
-	int	n;
-	int	sig;
-	int	i;
+	long long	n;
+	int			sig;
+	int			i;
 
 	n = 0;
 	i = 0;

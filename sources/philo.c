@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:01 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/07 18:45:53 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:07:17 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int	check_arg(char **argv)
 	int	error;
 
 	error = 0;
-	if (ft_atoi(argv[1]) <= 0)
+	if (ft_atoll(argv[1]) <= 0 || ft_atoll(argv[1]) > INT_MAX)
 		error = printf("Error: Invalid number of philosophers.\n");
-	if (ft_atoi(argv[2]) <= 0)
+	if (ft_atoll(argv[2]) <= 0 || ft_atoll(argv[2]) > INT_MAX)
 		error = printf("Error: Invalid time to die.\n");
-	if (ft_atoi(argv[3]) <= 0)
+	if (ft_atoll(argv[3]) <= 0 || ft_atoll(argv[3]) > INT_MAX)
 		error = printf("Error: Invalid time to eat.\n");
-	if (ft_atoi(argv[4]) <= 0)
+	if (ft_atoll(argv[4]) <= 0 || ft_atoll(argv[4]) > INT_MAX)
 		error = printf("Error: Invalid time to sleep.\n");
 	if (argv[5])
 	{
-		if (ft_atoi(argv[5]) <= 0)
+		if (ft_atoll(argv[5]) <= 0 || ft_atoll(argv[5]) > INT_MAX)
 		{
 			error = printf
 				("Error: Invalid number of times each philosopher must eat.\n");
@@ -43,12 +43,12 @@ int	init_data(char **argv, t_philo *philo)
 
 	i = 0;
 	error = check_arg(argv);
-	philo->num_of_philos = ft_atoi(argv[1]);
-	philo->time_to_die = ft_atoi(argv[2]);
-	philo->time_to_eat = ft_atoi(argv[3]);
-	philo->time_to_sleep = ft_atoi(argv[4]);
+	philo->num_of_philos = ft_atoll(argv[1]);
+	philo->time_to_die = ft_atoll(argv[2]);
+	philo->time_to_eat = ft_atoll(argv[3]);
+	philo->time_to_sleep = ft_atoll(argv[4]);
 	if (argv[5])
-		philo->philos_must_eat = ft_atoi(argv[5]);
+		philo->philos_must_eat = ft_atoll(argv[5]);
 	else
 		philo->philos_must_eat = -1;
 	if (error == 0)
