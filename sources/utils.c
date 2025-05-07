@@ -6,34 +6,23 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/05 16:11:58 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:51:52 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*start_thread(void *philo)
+void	*start_philo(void *philo)
 {
 	static int i = 0;
+
 	if ((pthread_t) philo)
 		printf("Philo %d created\n", ++i);
-	sleep(3);
 	return (NULL);
 }
 
 void	ft_free(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < philo->number_of_philosophers)
-	{
-		if (&philo->mutex[i])
-			pthread_mutex_destroy(&philo->mutex[i]);
-		i++;
-	}
-	if (philo->mutex)
-		free (philo->mutex);
 	if (philo->philosopher)
 		free (philo->philosopher);
 }
@@ -42,21 +31,25 @@ int	ft_atoi(const char *str)
 {
 	int	n;
 	int	sig;
+	int	i;
 
 	n = 0;
+	i = 0;
 	sig = 1;
-	while (*str == 32 || (*str > 8 && *str < 14))
+	while (str[i] == 32 || (str[i] > 8 && str[i] < 14))
 		str++;
-	if (*str == '-' || *str == '+')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (*str == ('-'))
+		if (str[i] == ('-'))
 			sig = -1;
-		str++;
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		n = (n * 10) + (*str - '0');
-		str++;
+		n = (n * 10) + (str[i] - '0');
+		i++;
 	}
+	if (str[i])
+		return (0);
 	return (n * sig);
 }

@@ -6,38 +6,58 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:01 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/05 16:03:31 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:45:53 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_data(char **argv, t_philo *philo)
+int	check_arg(char **argv)
+{
+	int	error;
+
+	error = 0;
+	if (ft_atoi(argv[1]) <= 0)
+		error = printf("Error: Invalid number of philosophers.\n");
+	if (ft_atoi(argv[2]) <= 0)
+		error = printf("Error: Invalid time to die.\n");
+	if (ft_atoi(argv[3]) <= 0)
+		error = printf("Error: Invalid time to eat.\n");
+	if (ft_atoi(argv[4]) <= 0)
+		error = printf("Error: Invalid time to sleep.\n");
+	if (argv[5])
+	{
+		if (ft_atoi(argv[5]) <= 0)
+		{
+			error = printf
+				("Error: Invalid number of times each philosopher must eat.\n");
+		}
+	}
+	return (error);
+}
+
+int	init_data(char **argv, t_philo *philo)
 {
 	int	i;
+	int	error;
 
 	i = 0;
-	philo->number_of_philosophers = ft_atoi(argv[1]);
+	error = check_arg(argv);
+	philo->num_of_philos = ft_atoi(argv[1]);
 	philo->time_to_die = ft_atoi(argv[2]);
 	philo->time_to_eat = ft_atoi(argv[3]);
 	philo->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5])
-		philo->philosopher_must_eat = ft_atoi(argv[5]);
-	philo->mutex = malloc
-		(sizeof(pthread_mutex_t) * philo->number_of_philosophers);
-	while (i < philo->number_of_philosophers)
+		philo->philos_must_eat = ft_atoi(argv[5]);
+	else
+		philo->philos_must_eat = -1;
+	if (error == 0)
 	{
-		pthread_mutex_init(&philo->mutex[i], NULL);
-		i++;
+		philo->philosopher = malloc(sizeof(pthread_t) * philo->num_of_philos);
+		while (i < philo->num_of_philos)
+			pthread_create(&philo->philosopher[i++], NULL, &start_philo, philo);
 	}
-	i = 0;
-	philo->philosopher = malloc
-		(sizeof(pthread_t) * philo->number_of_philosophers);
-	while (i < philo->number_of_philosophers)
-	{
-		pthread_create(&philo->philosopher[i], NULL, &start_thread, philo);
-		i++;
-	}
+	return (error);
 }
 
 int	main(int argc, char **argv)
@@ -48,13 +68,14 @@ int	main(int argc, char **argv)
 	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
-		init_data(argv, &philo);
-		printf("number_of_philosophers: %d\n", philo.number_of_philosophers);
+		if (init_data(argv, &philo))
+			return (EXIT_FAILURE);
+		usleep(300);
+		printf("num_of_philos: %d\n", philo.num_of_philos);
 		printf("time_to_die: %d\n", philo.time_to_die);
 		printf("time_to_eat: %d\n", philo.time_to_eat);
 		printf("time_to_sleep: %d\n", philo.time_to_sleep);
-		printf("philosopher_must_eat: %d\n", philo.philosopher_must_eat);
-		sleep(3);
+		printf("philosopher_must_eat: %d\n", philo.philos_must_eat);
 		ft_free(&philo);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/05 15:50:38 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:17:17 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,16 @@
 typedef struct s_philo
 {
 	pthread_t		*philosopher;
-	pthread_mutex_t	*mutex;
-	int				number_of_philosophers;
+	int				num_of_philos;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				philosopher_must_eat;
+	int				philos_must_eat;
 }	t_philo;
 
 //utils.c-------------------------------------------------------
 int		ft_atoi(const char *str);
 void	ft_free(t_philo *philo);
-void	*start_thread(void *philo);
+void	*start_philo(void *philo);
 
 #endif
