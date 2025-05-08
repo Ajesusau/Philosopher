@@ -47,12 +47,12 @@ int	main(int argc, char **argv)
 		if (init_data(argv, &data))
 			return (EXIT_FAILURE);
 		printf("num_of_philos: %d\n", data.num_of_philos);
-		printf("time_to_die: %d\n", data.time_to_die);
-		printf("time_to_eat: %d\n", data.time_to_eat);
-		printf("time_to_sleep: %d\n", data.time_to_sleep);
 		printf("philosopher_must_eat: %d\n", data.philos_must_eat);
-		ini_philo(&data);
+		ini_philo(&data, argv);
 		wait_for_philos(&data);
+		printf("time_to_die: %d\n", data.philos[0].time_to_die);
+		printf("time_to_eat: %d\n", data.philos[0].time_to_eat);
+		printf("time_to_sleep: %d\n", data.philos[0].time_to_sleep);
 		if (data.philos)
 			free (data.philos);
 	}
