@@ -6,17 +6,11 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 12:56:59 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:25:10 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	ft_free(t_data *data)
-{
-	if (data->philos)
-		free (data->philos);
-}
 
 long long	ft_atoll(const char *str)
 {

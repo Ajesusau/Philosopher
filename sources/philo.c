@@ -53,7 +53,8 @@ int	main(int argc, char **argv)
 		printf("philosopher_must_eat: %d\n", data.philos_must_eat);
 		ini_philo(&data);
 		wait_for_philos(&data);
-		ft_free(&data);
+		if (data.philos)
+			free (data.philos);
 	}
 	else
 		printf("Error: Invalid argument count.\n");

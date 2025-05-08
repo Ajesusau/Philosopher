@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 13:02:42 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:26:40 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ void		wait_for_philos(t_data *data);
 
 //utils.c-------------------------------------------------------
 long long	ft_atoll(const char *str);
-void		ft_free(t_data *data);
 
 #endif
