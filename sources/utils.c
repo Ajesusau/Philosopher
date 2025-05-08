@@ -6,11 +6,33 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 13:25:10 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:26:28 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	msleep(size_t m_second)
+{
+	usleep(m_second * 1000);
+}
+
+void	send_messages(size_t start_time, int id, char *str)
+{
+	size_t	time;
+
+	time = get_current_time() - start_time;
+	printf("%zu %d %s\n", time, id, str);
+}
+
+size_t	get_current_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
 
 long long	ft_atoll(const char *str)
 {
