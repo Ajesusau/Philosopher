@@ -1,46 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 12:56:59 by anareval         ###   ########.fr       */
+/*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
+/*   Updated: 2025/05/08 13:03:31 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_free(t_data *data)
+void	wait_for_philos(t_data *data)
 {
-	if (data->philos)
-		free (data->philos);
-}
+	int	i;
 
-long long	ft_atoll(const char *str)
-{
-	long long	n;
-	int			sig;
-	int			i;
-
-	n = 0;
 	i = 0;
-	sig = 1;
-	while (str[i] == 32 || (str[i] > 8 && str[i] < 14))
-		str++;
-	if (str[i] == '-' || str[i] == '+')
+	while (i < data->num_of_philos)
 	{
-		if (str[i] == ('-'))
-			sig = -1;
+		pthread_join(data->philos[i].thread, NULL);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		n = (n * 10) + (str[i] - '0');
-		i++;
-	}
-	if (str[i])
-		return (0);
-	return (n * sig);
 }

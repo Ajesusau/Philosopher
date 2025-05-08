@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/07 20:56:30 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:02:42 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -37,10 +38,19 @@ typedef struct s_data
 	t_philo		*philos;
 }	t_data;
 
+//inicialice.c--------------------------------------------------
+void		*start_philo(void *var);
+void		ini_philo(t_data *data);
+int			init_data(char **argv, t_data *data);
+
+//philo.c-------------------------------------------------------
+int			check_arg(char **argv);
+
+//threads.c-----------------------------------------------------
+void		wait_for_philos(t_data *data);
+
 //utils.c-------------------------------------------------------
 long long	ft_atoll(const char *str);
 void		ft_free(t_data *data);
-void		*start_philo(void *var);
-void		wait_for_philos(t_data *data);
 
 #endif
