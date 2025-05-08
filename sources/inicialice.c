@@ -6,22 +6,11 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 16:41:01 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/08 19:31:37 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	*start_philo(void *var)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *) var;
-	send_messages(philo->start_time, philo->id, "se ha creado");
-	msleep(9);
-	send_messages(philo->start_time, philo->id, "se esta aburriendo");
-	return (NULL);
-}
 
 void	ini_philo(t_data *data, char **argv)
 {
@@ -34,6 +23,7 @@ void	ini_philo(t_data *data, char **argv)
 		data->philos[i].time_to_die = ft_atoll(argv[2]);
 		data->philos[i].time_to_eat = ft_atoll(argv[3]);
 		data->philos[i].time_to_sleep = ft_atoll(argv[4]);
+		data->philos[i].philos_must_eat = data->philos_must_eat;
 		data->philos[i].dead_flag = 0;
 		data->philos[i].start_time = get_current_time();
 		pthread_create

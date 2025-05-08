@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   philo_rutine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 19:24:21 by anareval         ###   ########.fr       */
+/*   Created: 2025/05/08 18:55:40 by anareval          #+#    #+#             */
+/*   Updated: 2025/05/08 19:25:35 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*start_philo(void *var)
+void	ft_think(t_philo *philo)
 {
-	t_philo	*philo;
-	int		i;
-
-	i = 0;
-	philo = (t_philo *) var;
-	while (i <= philo->philos_must_eat)
-	{
-		ft_eat(philo);
-		ft_sleep(philo);
-		ft_think(philo);
-		i++;
-	}
-	return (NULL);
+	send_messages(philo->start_time, philo->id, "is thinking");
 }
 
-void	wait_for_philos(t_data *data)
+void	ft_sleep(t_philo *philo)
 {
-	int	i;
+	send_messages(philo->start_time, philo->id, "is sleeping");
+	msleep(philo->time_to_sleep);
+}
 
-	i = 0;
-	while (i < data->num_of_philos)
-	{
-		pthread_join(data->philos[i].thread, NULL);
-		i++;
-	}
+void	ft_eat(t_philo *philo)
+{
+	send_messages(philo->start_time, philo->id, "is eating");
+	msleep(philo->time_to_eat);
 }

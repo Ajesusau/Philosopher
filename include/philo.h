@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 16:40:36 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/08 19:21:56 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
+	int			philos_must_eat;
 	int			dead_flag;
 }	t_philo;
 
@@ -40,14 +41,19 @@ typedef struct s_data
 }	t_data;
 
 //inicialice.c--------------------------------------------------
-void		*start_philo(void *var);
 void		ini_philo(t_data *data, char **argv);
 int			init_data(char **argv, t_data *data);
+
+//inicialice.c--------------------------------------------------
+void		ft_think(t_philo *philo);
+void		ft_sleep(t_philo *philo);
+void		ft_eat(t_philo *philo);
 
 //philo.c-------------------------------------------------------
 int			check_arg(char **argv);
 
 //threads.c-----------------------------------------------------
+void		*start_philo(void *var);
 void		wait_for_philos(t_data *data);
 
 //utils.c-------------------------------------------------------

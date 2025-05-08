@@ -6,7 +6,7 @@
 #    By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 16:53:28 by anareval          #+#    #+#              #
-#    Updated: 2025/05/08 12:59:53 by anareval         ###   ########.fr        #
+#    Updated: 2025/05/08 19:22:42 by anareval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ RM = rm -f
 HEADERS = 	-I ./include
 
 SRCS =				sources/inicialice.c \
+					sources/philo_rutine.c \
 					sources/philo.c \
 					sources/threads.c \
 					sources/utils.c \
