@@ -6,13 +6,13 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 19:31:37 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/12 20:40:37 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ini_philo(t_data *data, char **argv)
+void	ini_philo(t_data *data)
 {
 	int	i;
 
@@ -20,12 +20,7 @@ void	ini_philo(t_data *data, char **argv)
 	while (i < data->num_of_philos)
 	{
 		data->philos[i].id = i + 1;
-		data->philos[i].time_to_die = ft_atoll(argv[2]);
-		data->philos[i].time_to_eat = ft_atoll(argv[3]);
-		data->philos[i].time_to_sleep = ft_atoll(argv[4]);
-		data->philos[i].philos_must_eat = data->philos_must_eat;
-		data->philos[i].dead_flag = 0;
-		data->philos[i].start_time = get_current_time();
+		data->philos[i].data = data;
 		pthread_create
 			(&data->philos[i].thread, NULL, &start_philo, &data->philos[i]);
 		i++;
@@ -39,6 +34,11 @@ int	init_data(char **argv, t_data *data)
 
 	i = 0;
 	error = check_arg(argv);
+	data->time_to_die = ft_atoll(argv[2]);
+	data->time_to_eat = ft_atoll(argv[3]);
+	data->time_to_sleep = ft_atoll(argv[4]);
+	data->dead_flag = 0;
+	data->start_time = get_current_time();
 	data->num_of_philos = ft_atoll(argv[1]);
 	if (argv[5])
 		data->philos_must_eat = ft_atoll(argv[5]);

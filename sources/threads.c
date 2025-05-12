@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 19:24:21 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/12 20:34:01 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*start_philo(void *var)
 
 	i = 0;
 	philo = (t_philo *) var;
-	while (i <= philo->philos_must_eat)
+	while (i <= philo->data->philos_must_eat)
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
