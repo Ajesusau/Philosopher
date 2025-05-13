@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 20:20:47 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:48:44 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	is_dead(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->dead_mutex);
-	data->dead_flag++;
+	data->dead_flag = 1;
 	pthread_mutex_unlock(&data->dead_mutex);
 	msleep(1);
 	send_messages(data->start_time, i + 1, "is dead");
@@ -25,12 +25,16 @@ int	all_meals(t_data *data)
 {
 	int	i;
 	int	count_all_meals;
+	int	meals_count;
 
 	i = 0;
 	count_all_meals = 0;
 	while (i < data->num_of_philos)
 	{
-		if (data->philos[i].meals_count == data->philos_must_eat)
+		pthread_mutex_lock(&data->philos[i].meals_count_mutex);
+		meals_count = data->philos[i].meals_count;
+		pthread_mutex_unlock(&data->philos[i].meals_count_mutex);
+		if (meals_count == data->philos_must_eat)
 			count_all_meals++;
 		i++;
 	}
