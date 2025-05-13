@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 13:36:03 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:55:10 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ini_philo(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
+		data->philos[i].last_meat = data->start_time;
 		data->philos[i].right = data->philos[i].id - 1;
 		if (data->philos[i].id == data->num_of_philos)
 			data->philos[i].left = 0;

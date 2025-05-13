@@ -51,6 +51,8 @@ int	main(int argc, char **argv)
 		wait_for_philos(&data);
 		if (data.philos)
 			free (data.philos);
+		if (data.forks)
+			free (data.forks);
 	}
 	else
 		printf("Error: Invalid argument count.\n");

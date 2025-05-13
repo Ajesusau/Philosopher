@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 13:35:28 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:41:42 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_philo
 	t_data			*data;
 	int				right;
 	int				left;
+	size_t			last_meat;
 }	t_philo;
 
 typedef struct s_data
