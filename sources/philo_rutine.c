@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:55:40 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 19:50:43 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:10:09 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 static	void	lock_mutex(int first, int second, t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->forks[first]);
-	send_messages(philo->data->start_time, philo->id, "has taken a fork");
-	if (philo->data->num_of_philos == 1)
-		return ;
-	pthread_mutex_lock(&philo->data->forks[second]);
-	send_messages(philo->data->start_time, philo->id, "has taken a fork");
+	if (!philo->data->dead_flag)
+	{
+		pthread_mutex_lock(&philo->data->forks[first]);
+		send_messages(philo->data->start_time, philo->id, "has taken a fork");
+		if (philo->data->num_of_philos == 1)
+			return ;
+	}
+	if (!philo->data->dead_flag)
+	{
+		pthread_mutex_lock(&philo->data->forks[second]);
+		send_messages(philo->data->start_time, philo->id, "has taken a fork");
+	}
 }
 
 void	ft_think(t_philo *philo)

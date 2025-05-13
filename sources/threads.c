@@ -6,11 +6,20 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 19:28:39 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:20:47 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	is_dead(t_data *data, int i)
+{
+	pthread_mutex_lock(&data->dead_mutex);
+	data->dead_flag++;
+	pthread_mutex_unlock(&data->dead_mutex);
+	msleep(1);
+	send_messages(data->start_time, i + 1, "is dead");
+}
 
 int	all_meals(t_data *data)
 {
@@ -47,12 +56,9 @@ void	*start_god(void *var)
 			pthread_mutex_lock(&data->philos[i].eat_mutex);
 			last_meal_time = get_current_time() - data->philos[i].last_meal;
 			pthread_mutex_unlock(&data->philos[i].eat_mutex);
-			if (( last_meal_time >= data->time_to_die))
+			if (last_meal_time >= data->time_to_die)
 			{
-				pthread_mutex_lock(&data->dead_mutex);
-				data->dead_flag++;
-				pthread_mutex_unlock(&data->dead_mutex);
-				send_messages(data->start_time, i + 1, "is dead");
+				is_dead(data, i);
 				break ;
 			}
 			i++;
@@ -66,7 +72,7 @@ void	*start_philo(void *var)
 	t_philo	*philo;
 
 	philo = (t_philo *) var;
-	while (!philo->data->dead_flag 
+	while (!philo->data->dead_flag
 		&& (philo->meals_count != philo->data->philos_must_eat))
 	{
 		ft_eat(philo);
