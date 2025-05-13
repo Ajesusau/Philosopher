@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 18:06:23 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:23:43 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct s_philo
 	int				right;
 	int				left;
 	size_t			last_meal;
-	int				eats_count;
+	int				meals_count;
+	pthread_mutex_t	meals_count_mutex;
+	pthread_mutex_t	eat_mutex;
 }	t_philo;
 
 typedef struct s_data

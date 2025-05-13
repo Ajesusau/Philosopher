@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 18:12:37 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:28:39 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	all_meals(t_data *data)
 	count_all_meals = 0;
 	while (i < data->num_of_philos)
 	{
-		if (data->philos[i].eats_count == data->philos_must_eat)
+		if (data->philos[i].meals_count == data->philos_must_eat)
 			count_all_meals++;
 		i++;
 	}
-	if (count_all_meals == data->philos_must_eat)
+	if (count_all_meals == data->num_of_philos)
 		return (1);
 	else
 		return (0);
@@ -34,6 +34,7 @@ int	all_meals(t_data *data)
 void	*start_god(void *var)
 {
 	t_data	*data;
+	size_t	last_meal_time;
 	int		i;
 
 	data = (t_data *) var;
@@ -43,9 +44,10 @@ void	*start_god(void *var)
 		msleep(1);
 		while (i < data->num_of_philos)
 		{
-			if (((get_current_time() - data->philos[i].last_meal)
-					>= data->time_to_die) && (data->philos[i].eats_count
-					!= data->philos_must_eat))
+			pthread_mutex_lock(&data->philos[i].eat_mutex);
+			last_meal_time = get_current_time() - data->philos[i].last_meal;
+			pthread_mutex_unlock(&data->philos[i].eat_mutex);
+			if (( last_meal_time >= data->time_to_die))
 			{
 				pthread_mutex_lock(&data->dead_mutex);
 				data->dead_flag++;
@@ -62,11 +64,10 @@ void	*start_god(void *var)
 void	*start_philo(void *var)
 {
 	t_philo	*philo;
-	int		i;
 
-	i = 0;
 	philo = (t_philo *) var;
-	while (!philo->data->dead_flag && !all_meals(philo->data))
+	while (!philo->data->dead_flag 
+		&& (philo->meals_count != philo->data->philos_must_eat))
 	{
 		ft_eat(philo);
 		ft_sleep(philo);

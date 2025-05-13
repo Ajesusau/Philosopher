@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:55:40 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 18:10:05 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:50:43 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,19 @@ void	ft_eat(t_philo *philo)
 	{
 		lock_mutex(philo->right, philo->left, philo);
 		if (philo->data->num_of_philos == 1)
-		{
 			msleep(philo->data->time_to_die + 10);
-			pthread_mutex_unlock(&philo->data->forks[philo->right]);
-			return ;
-		}
 	}
-	send_messages(philo->data->start_time, philo->id, "is eating");
-	philo->eats_count++;
-	msleep(philo->data->time_to_eat);
-	philo->last_meal = get_current_time();
+	if (!philo->data->dead_flag)
+	{
+		pthread_mutex_lock(&philo->eat_mutex);
+		send_messages(philo->data->start_time, philo->id, "is eating");
+		pthread_mutex_lock(&philo->meals_count_mutex);
+		philo->meals_count++;
+		pthread_mutex_unlock(&philo->meals_count_mutex);
+		msleep(philo->data->time_to_eat);
+		philo->last_meal = get_current_time();
+		pthread_mutex_unlock(&philo->eat_mutex);
+	}
 	pthread_mutex_unlock(&philo->data->forks[philo->left]);
 	pthread_mutex_unlock(&philo->data->forks[philo->right]);
 }
