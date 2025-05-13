@@ -6,11 +6,36 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 13:33:32 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:05:32 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*start_god(void *var)
+{
+	t_data	*data;
+	int		i;
+
+	data = (t_data *) var;
+	while (!data->dead_flag)
+	{
+		i = 0;
+		while (i < data->num_of_philos)
+		{
+			if ((get_current_time() - data->philos[i].last_meat)
+				>= data->time_to_die)
+			{
+				send_messages(data->start_time, i, "is dead");
+				data->dead_flag++;
+				break ;
+			}
+			i++;
+		}
+		msleep(1);
+	}
+	return (NULL);
+}
 
 void	*start_philo(void *var)
 {
@@ -51,4 +76,5 @@ void	wait_for_philos(t_data *data)
 		pthread_join(data->philos[i].thread, NULL);
 		i++;
 	}
+	pthread_join(data->god, NULL);
 }

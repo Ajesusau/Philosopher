@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:55:40 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 13:43:43 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:21:12 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_eat(t_philo *philo)
 	}
 	send_messages(philo->data->start_time, philo->id, "is eating");
 	msleep(philo->data->time_to_eat);
-	philo->last_meat = get_current_time() - philo->data->start_time;
+	philo->last_meat = get_current_time();
 	pthread_mutex_unlock(&philo->data->forks[philo->left]);
 	pthread_mutex_unlock(&philo->data->forks[philo->right]);
 }

@@ -48,11 +48,9 @@ int	main(int argc, char **argv)
 			return (EXIT_FAILURE);
 		ini_fork(&data);
 		ini_philo(&data);
+		pthread_create (&data.god, NULL, &start_god, &data);
 		wait_for_philos(&data);
-		if (data.philos)
-			free (data.philos);
-		if (data.forks)
-			free (data.forks);
+		free_exit(&data);
 	}
 	else
 		printf("Error: Invalid argument count.\n");

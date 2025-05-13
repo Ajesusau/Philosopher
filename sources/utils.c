@@ -6,11 +6,27 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/08 16:26:28 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:06:26 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	free_exit(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+	if (data->philos)
+		free (data->philos);
+	if (data->forks)
+		free (data->forks);
+}
 
 void	msleep(size_t m_second)
 {

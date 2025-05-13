@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 13:41:42 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:57:52 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
 	int				philos_must_eat;
 	int				num_of_philos;
 	size_t			start_time;
 	int				dead_flag;
+	pthread_t		god;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 }	t_data;
@@ -60,10 +61,12 @@ void		ft_eat(t_philo *philo);
 int			check_arg(char **argv);
 
 //threads.c-----------------------------------------------------
+void		*start_god(void *var);
 void		*start_philo(void *var);
 void		wait_for_philos(t_data *data);
 
 //utils.c-------------------------------------------------------
+void		free_exit(t_data *data);
 void		msleep(size_t m_second);
 void		send_messages(size_t start_time, int id, char *str);
 size_t		get_current_time(void);

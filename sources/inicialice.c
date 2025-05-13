@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 13:55:10 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:02:23 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,11 @@ int	init_data(char **argv, t_data *data)
 		data->philos_must_eat = ft_atoll(argv[5]);
 	else
 		data->philos_must_eat = -1;
-	if (error == 0)
-	{
-		data->philos = malloc (sizeof(t_philo) * data->num_of_philos);
-		if (!data->philos)
-			return (1);
-		data->forks = malloc (sizeof(pthread_mutex_t) * data->num_of_philos);
-		if (!data->forks)
-			return (1);
-	}
+	data->philos = malloc (sizeof(t_philo) * data->num_of_philos);
+	if (!data->philos)
+		return (1);
+	data->forks = malloc (sizeof(pthread_mutex_t) * data->num_of_philos);
+	if (!data->forks)
+		return (1);
 	return (error);
 }
