@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 21:48:44 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 22:40:22 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	*start_god(void *var)
 			pthread_mutex_lock(&data->philos[i].eat_mutex);
 			last_meal_time = get_current_time() - data->philos[i].last_meal;
 			pthread_mutex_unlock(&data->philos[i].eat_mutex);
-			if (last_meal_time >= data->time_to_die)
+			if (last_meal_time >= data->time_to_die
+				&& data->philos[i].meals_count != data->philos_must_eat)
 			{
 				is_dead(data, i);
 				break ;
