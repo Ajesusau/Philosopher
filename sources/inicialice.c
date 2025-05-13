@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 15:02:23 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:46:50 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	ini_philo(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
-		data->philos[i].last_meat = data->start_time;
+		data->philos[i].last_meal = data->start_time;
 		data->philos[i].right = data->philos[i].id - 1;
+		data->philos[i].eats_count = 0;
 		if (data->philos[i].id == data->num_of_philos)
 			data->philos[i].left = 0;
 		else
@@ -58,6 +59,7 @@ int	init_data(char **argv, t_data *data)
 	data->dead_flag = 0;
 	data->start_time = get_current_time();
 	data->num_of_philos = ft_atoll(argv[1]);
+	pthread_mutex_init(&data->dead_mutex, NULL);
 	if (argv[5])
 		data->philos_must_eat = ft_atoll(argv[5]);
 	else

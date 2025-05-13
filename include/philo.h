@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 15:57:52 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:06:23 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_philo
 	t_data			*data;
 	int				right;
 	int				left;
-	size_t			last_meat;
+	size_t			last_meal;
+	int				eats_count;
 }	t_philo;
 
 typedef struct s_data
@@ -42,6 +43,7 @@ typedef struct s_data
 	int				num_of_philos;
 	size_t			start_time;
 	int				dead_flag;
+	pthread_mutex_t	dead_mutex;
 	pthread_t		god;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
@@ -61,6 +63,7 @@ void		ft_eat(t_philo *philo);
 int			check_arg(char **argv);
 
 //threads.c-----------------------------------------------------
+int			all_meals(t_data *data);
 void		*start_god(void *var);
 void		*start_philo(void *var);
 void		wait_for_philos(t_data *data);
