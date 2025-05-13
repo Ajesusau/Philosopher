@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/12 20:40:37 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:36:03 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,25 @@ void	ini_philo(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
+		data->philos[i].right = data->philos[i].id - 1;
+		if (data->philos[i].id == data->num_of_philos)
+			data->philos[i].left = 0;
+		else
+			data->philos[i].left = data->philos[i].id;
 		pthread_create
 			(&data->philos[i].thread, NULL, &start_philo, &data->philos[i]);
+		i++;
+	}
+}
+
+void	ini_fork(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philos)
+	{
+		pthread_mutex_init(&data->forks[i], NULL);
 		i++;
 	}
 }
@@ -45,6 +62,13 @@ int	init_data(char **argv, t_data *data)
 	else
 		data->philos_must_eat = -1;
 	if (error == 0)
-		data->philos = malloc(sizeof(t_philo) * data->num_of_philos);
+	{
+		data->philos = malloc (sizeof(t_philo) * data->num_of_philos);
+		if (!data->philos)
+			return (1);
+		data->forks = malloc (sizeof(pthread_mutex_t) * data->num_of_philos);
+		if (!data->forks)
+			return (1);
+	}
 	return (error);
 }

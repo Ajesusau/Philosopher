@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/12 20:43:45 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:35:28 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,29 @@ typedef struct s_data	t_data;
 
 typedef struct s_philo
 {
-	pthread_t	thread;
-	int			id;
-	t_data		*data;
+	pthread_t		thread;
+	int				id;
+	t_data			*data;
+	int				right;
+	int				left;
 }	t_philo;
 
 typedef struct s_data
 {
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			philos_must_eat;
-	int			num_of_philos;
-	size_t		start_time;
-	int			dead_flag;
-	t_philo		*philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				philos_must_eat;
+	int				num_of_philos;
+	size_t			start_time;
+	int				dead_flag;
+	t_philo			*philos;
+	pthread_mutex_t	*forks;
 }	t_data;
 
 //inicialice.c--------------------------------------------------
 void		ini_philo(t_data *data);
+void		ini_fork(t_data *data);
 int			init_data(char **argv, t_data *data);
 
 //inicialice.c--------------------------------------------------

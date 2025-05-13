@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	{
 		if (init_data(argv, &data))
 			return (EXIT_FAILURE);
+		ini_fork(&data);
 		ini_philo(&data);
 		wait_for_philos(&data);
 		if (data.philos)
