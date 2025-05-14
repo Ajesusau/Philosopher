@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
-		if(check_arg(argv))
+		if (check_arg(argv))
 			return (EXIT_FAILURE);
 		if (init_data(argv, &data))
 		{
