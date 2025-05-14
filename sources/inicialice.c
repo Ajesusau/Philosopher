@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 15:35:21 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:27:38 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ void	ini_fork(t_data *data)
 int	init_data(char **argv, t_data *data)
 {
 	int	i;
-	int	error;
 
 	i = 0;
-	error = check_arg(argv);
 	data->time_to_die = ft_atoll(argv[2]);
 	data->time_to_eat = ft_atoll(argv[3]);
 	data->time_to_sleep = ft_atoll(argv[4]);
@@ -74,5 +72,5 @@ int	init_data(char **argv, t_data *data)
 	data->forks = malloc (sizeof(pthread_mutex_t) * data->num_of_philos);
 	if (!data->forks)
 		return (1);
-	return (error);
+	return (0);
 }

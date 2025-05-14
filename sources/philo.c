@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	check_arg(char **argv)
+static int	check_arg(char **argv)
 {
 	int	error;
 
@@ -44,6 +44,8 @@ int	main(int argc, char **argv)
 	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
+		if(check_arg(argv))
+			return (EXIT_FAILURE);
 		if (init_data(argv, &data))
 		{
 			pthread_mutex_destroy(&data.dead_mutex);
@@ -61,5 +63,4 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("Error: Invalid argument count.\n");
-	return (0);
 }

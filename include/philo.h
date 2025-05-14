@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 15:05:21 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:34:15 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void		ini_fork(t_data *data);
 int			init_data(char **argv, t_data *data);
 
 //philo_rutine_utils.c------------------------------------------
+//static void	send_message_fork(t_philo *philo);
+//static int	is_philo_dead(t_philo *philo);
 void		eat_process(t_philo *philo);
 void		lock_mutex(int first, int second, t_philo *philo, int option);
 
@@ -68,9 +70,11 @@ void		ft_sleep(t_philo *philo);
 void		ft_eat(t_philo *philo);
 
 //philo.c-------------------------------------------------------
-int			check_arg(char **argv);
+//static int			check_arg(char **argv);
+//int	main(int argc, char **argv);
 
 //threads.c-----------------------------------------------------
+//static void	is_dead(t_data *data, int i);
 int			all_meals(t_data *data);
 void		*start_god(void *var);
 void		*start_philo(void *var);
