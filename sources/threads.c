@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 13:08:27 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:04:45 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	*start_god(void *var)
 			}
 			i++;
 		}
-		msleep(1);
 	}
 	return (NULL);
 }
