@@ -45,13 +45,21 @@ int	main(int argc, char **argv)
 	if (argc >= 5 && argc <= 6)
 	{
 		if (init_data(argv, &data))
+		{
+			pthread_mutex_destroy(&data.dead_mutex);
+			if (data.philos != NULL)
+				free (data.philos);
+			if (data.forks != NULL)
+				free (data.forks);
 			return (EXIT_FAILURE);
+		}
 		ini_fork(&data);
 		ini_philo(&data);
 		pthread_create (&data.god, NULL, &start_god, &data);
 		wait_for_philos(&data);
-		free_exit(&data);
+		ft_free(&data);
 	}
 	else
 		printf("Error: Invalid argument count.\n");
+	return (0);
 }

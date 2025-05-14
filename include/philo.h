@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/13 19:23:43 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:05:21 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_philo
 	t_data			*data;
 	int				right;
 	int				left;
+	int				lock_r_check;
+	int				lock_l_check;
 	size_t			last_meal;
 	int				meals_count;
 	pthread_mutex_t	meals_count_mutex;
@@ -56,7 +58,11 @@ void		ini_philo(t_data *data);
 void		ini_fork(t_data *data);
 int			init_data(char **argv, t_data *data);
 
-//inicialice.c--------------------------------------------------
+//philo_rutine_utils.c------------------------------------------
+void		eat_process(t_philo *philo);
+void		lock_mutex(int first, int second, t_philo *philo, int option);
+
+//philo_rutine.c------------------------------------------------
 void		ft_think(t_philo *philo);
 void		ft_sleep(t_philo *philo);
 void		ft_eat(t_philo *philo);
@@ -71,7 +77,7 @@ void		*start_philo(void *var);
 void		wait_for_philos(t_data *data);
 
 //utils.c-------------------------------------------------------
-void		free_exit(t_data *data);
+void		ft_free(t_data *data);
 void		msleep(size_t m_second);
 void		send_messages(size_t start_time, int id, char *str);
 size_t		get_current_time(void);
