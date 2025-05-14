@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 15:34:11 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:08:00 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_free(t_data *data)
 
 	i = 0;
 	while (i < data->num_of_philos)
-		{
-			pthread_mutex_destroy(&data->forks[i]);
-			pthread_mutex_destroy(&data->philos[i].eat_mutex);
-			pthread_mutex_destroy(&data->philos[i].meals_count_mutex);
-			i++;
-		}
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philos[i].eat_mutex);
+		pthread_mutex_destroy(&data->philos[i].meals_count_mutex);
+		i++;
+	}
 	pthread_mutex_destroy(&data->dead_mutex);
 	if (data->philos != NULL)
 		free (data->philos);

@@ -6,12 +6,13 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:54:30 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 14:58:24 by anareval         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:08:28 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-static void send_message_fork(t_philo *philo)
+
+static void	send_message_fork(t_philo *philo)
 {
 	send_messages (philo->data->start_time, philo->id, "has taken a fork");
 }
