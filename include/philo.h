@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 16:34:15 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:26:29 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	size_t			start_time;
 	int				dead_flag;
 	pthread_mutex_t	dead_mutex;
+	pthread_mutex_t	print_mutex;
 	pthread_t		god;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
@@ -83,7 +84,7 @@ void		wait_for_philos(t_data *data);
 //utils.c-------------------------------------------------------
 void		ft_free(t_data *data);
 void		msleep(size_t m_second);
-void		send_messages(size_t start_time, int id, char *str);
+void		send_messages(size_t start_time, int id, char *str, t_data *data);
 size_t		get_current_time(void);
 long long	ft_atoll(const char *str);
 

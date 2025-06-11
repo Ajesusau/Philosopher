@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:54:30 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 16:08:28 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:31:17 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	send_message_fork(t_philo *philo)
 {
-	send_messages (philo->data->start_time, philo->id, "has taken a fork");
+	send_messages
+		(philo->data->start_time, philo->id, "has taken a fork", philo->data);
 }
 
 static int	is_philo_dead(t_philo *philo)
@@ -35,7 +36,7 @@ void	eat_process(t_philo *philo)
 	pthread_mutex_lock(&philo->meals_count_mutex);
 	philo->meals_count++;
 	pthread_mutex_unlock(&philo->meals_count_mutex);
-	send_messages(philo->data->start_time, philo->id, "is eating");
+	send_messages(philo->data->start_time, philo->id, "is eating", philo->data);
 	msleep(philo->data->time_to_eat);
 }
 

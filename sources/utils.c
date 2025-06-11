@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:21:16 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 16:08:00 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:25:49 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	msleep(size_t m_second)
 	usleep(m_second * 1000);
 }
 
-void	send_messages(size_t start_time, int id, char *str)
+void	send_messages(size_t start_time, int id, char *str, t_data *data)
 {
 	size_t	time;
 
 	time = get_current_time() - start_time;
+	pthread_mutex_lock(&data->print_mutex);
 	printf("%zu %d %s\n", time, id, str);
+	pthread_mutex_unlock(&data->print_mutex);
 }
 
 size_t	get_current_time(void)

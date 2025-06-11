@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/05/14 16:27:38 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:24:00 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	init_data(char **argv, t_data *data)
 	data->start_time = get_current_time();
 	data->num_of_philos = ft_atoll(argv[1]);
 	pthread_mutex_init(&data->dead_mutex, NULL);
+	pthread_mutex_init(&data->print_mutex, NULL);
 	if (argv[5])
 		data->philos_must_eat = ft_atoll(argv[5]);
 	else
