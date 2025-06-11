@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/11 19:29:19 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:02:51 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*start_god(void *var)
 	int		i;
 
 	data = (t_data *) var;
-	while (!data->dead_flag && !all_meals(data))
+	while (!is_philo_dead(philo->data) && !all_meals(data))
 	{
 		i = 0;
 		msleep(1);
