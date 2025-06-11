@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:54:30 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/11 19:47:57 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:51:47 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	send_message_fork(t_philo *philo)
 		(philo->data->start_time, philo->id, "has taken a fork", philo->data);
 }
 
-static int	is_philo_dead(t_philo *philo)
+int	is_philo_dead(t_data *data)
 {
 	int	dead_flag;
 
-	pthread_mutex_lock(&philo->data->dead_mutex);
-	dead_flag = philo->data->dead_flag;
-	pthread_mutex_unlock(&philo->data->dead_mutex);
+	pthread_mutex_lock(&data->dead_mutex);
+	dead_flag = data->dead_flag;
+	pthread_mutex_unlock(&data->dead_mutex);
 	return (dead_flag);
 }
 
@@ -42,38 +42,26 @@ void	eat_process(t_philo *philo)
 
 void	lock_mutex(int first, int second, t_philo *philo, int option)
 {
-	if (!is_philo_dead(philo))
+	if (!is_philo_dead(philo->data))
 	{
 		pthread_mutex_lock(&philo->data->forks[first]);
 		if (option == 1)
 			philo->lock_l_check = 1;
 		else
 			philo->lock_r_check = 1;
-		if (!is_philo_dead(philo))
+		if (!is_philo_dead(philo->data))
 			send_message_fork(philo);
 		if (philo->data->num_of_philos == 1)
 			return ;
 	}
-	if (!is_philo_dead(philo))
+	if (!is_philo_dead(philo->data))
 	{
 		pthread_mutex_lock(&philo->data->forks[second]);
 		if (option == 1)
 			philo->lock_r_check = 1;
 		else
 			philo->lock_l_check = 1;
-		if (!is_philo_dead(philo))
+		if (!is_philo_dead(philo->data))
 			send_message_fork(philo);
 	}
-}
-
-int	is_any_dead(t_data *data)
-{
-	int	dead;
-
-	pthread_mutex_lock(&data->dead_mutex);
-	dead = data->dead_flag;
-	pthread_mutex_unlock(&data->dead_mutex);
-	if (dead)
-		return (1);
-	return (0);
 }

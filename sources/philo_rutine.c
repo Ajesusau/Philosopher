@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:55:40 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/11 19:47:02 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:52:27 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_think(t_philo *philo)
 {
-	if (!is_any_dead(philo->data) && !all_meals(philo->data))
+	if (!is_philo_dead(philo->data) && !all_meals(philo->data))
 		send_messages
 			(philo->data->start_time, philo->id, "is thinking", philo->data);
 }
 
 void	ft_sleep(t_philo *philo)
 {
-	if (!is_any_dead(philo->data) && !all_meals(philo->data))
+	if (!is_philo_dead(philo->data) && !all_meals(philo->data))
 	{
 		send_messages
 			(philo->data->start_time, philo->id, "is sleeping", philo->data);
@@ -42,7 +42,7 @@ void	ft_eat(t_philo *philo)
 		if (philo->data->num_of_philos == 1)
 			msleep(philo->data->time_to_die + 10);
 	}
-	if (!is_any_dead(philo->data))
+	if (!is_philo_dead(philo->data))
 	{
 		eat_process(philo);
 	}
