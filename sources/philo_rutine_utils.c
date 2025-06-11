@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:54:30 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/11 19:31:17 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:47:57 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,16 @@ void	lock_mutex(int first, int second, t_philo *philo, int option)
 		if (!is_philo_dead(philo))
 			send_message_fork(philo);
 	}
+}
+
+int	is_any_dead(t_data *data)
+{
+	int	dead;
+
+	pthread_mutex_lock(&data->dead_mutex);
+	dead = data->dead_flag;
+	pthread_mutex_unlock(&data->dead_mutex);
+	if (dead)
+		return (1);
+	return (0);
 }

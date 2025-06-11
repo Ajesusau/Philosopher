@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:00:05 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/11 19:26:29 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:48:05 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			init_data(char **argv, t_data *data);
 //static int	is_philo_dead(t_philo *philo);
 void		eat_process(t_philo *philo);
 void		lock_mutex(int first, int second, t_philo *philo, int option);
+int			is_any_dead(t_data *data);
 
 //philo_rutine.c------------------------------------------------
 void		ft_think(t_philo *philo);
