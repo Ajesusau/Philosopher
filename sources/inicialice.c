@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/12 11:10:30 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:42:28 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,28 @@ void	ini_philo(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (i < data->num_of_philos)
+	i = -1;
+	while (++i < data->num_of_philos)
 	{
-		data->philos[i].id = i + 1;
-		data->philos[i].data = data;
-		data->philos[i].last_meal = data->start_time;
-		data->philos[i].right = data->philos[i].id - 1;
-		data->philos[i].meals_count = 0;
-		data->philos[i].lock_l_check = 0;
-		data->philos[i].lock_r_check = 0;
 		pthread_mutex_init(&data->philos[i].eat_mutex, NULL);
 		pthread_mutex_init(&data->philos[i].meals_count_mutex, NULL);
+		data->philos[i].id = i + 1;
+		data->philos[i].data = data;
+		pthread_mutex_lock(&data->philos[i].eat_mutex);
+		data->philos[i].last_meal = data->start_time;
+		pthread_mutex_unlock(&data->philos[i].eat_mutex);
+		data->philos[i].right = data->philos[i].id - 1;
+		pthread_mutex_lock(&data->philos[i].meals_count_mutex);
+		data->philos[i].meals_count = 0;
+		pthread_mutex_unlock(&data->philos[i].meals_count_mutex);
+		data->philos[i].lock_l_check = 0;
+		data->philos[i].lock_r_check = 0;
 		if (data->philos[i].id == data->num_of_philos)
 			data->philos[i].left = 0;
 		else
 			data->philos[i].left = data->philos[i].id;
 		pthread_create
 			(&data->philos[i].thread, NULL, &start_philo, &data->philos[i]);
-		i++;
 	}
 }
 

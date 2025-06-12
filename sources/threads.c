@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/12 11:10:59 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:20:50 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void	is_dead(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->dead_mutex);
 	data->dead_flag = 1;
+	send_messages(data->start_time, i + 1, "died", data);
 	pthread_mutex_unlock(&data->dead_mutex);
 	msleep(1);
-	send_messages(data->start_time, i + 1, "died", data);
 }
 
 int	all_meals(t_data *data)
@@ -77,12 +77,13 @@ void	*start_philo(void *var)
 	t_philo	*philo;
 
 	philo = (t_philo *) var;
-	while (!philo->data->dead_flag
-		&& (philo->meals_count != philo->data->philos_must_eat))
+	while (!is_philo_dead(philo->data) && !all_meals(philo->data))
 	{
 		ft_eat(philo);
-		ft_sleep(philo);
-		ft_think(philo);
+		if (!is_philo_dead(philo->data) && !all_meals(philo->data))
+			ft_sleep(philo);
+		if (!is_philo_dead(philo->data) && !all_meals(philo->data))
+			ft_think(philo);
 	}
 	return (NULL);
 }
