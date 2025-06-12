@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/12 11:20:50 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:06:04 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	all_meals(t_data *data)
 		pthread_mutex_lock(&data->philos[i].meals_count_mutex);
 		meals_count = data->philos[i].meals_count;
 		pthread_mutex_unlock(&data->philos[i].meals_count_mutex);
-		if (meals_count == data->philos_must_eat)
+		if (meals_count >= data->philos_must_eat)
 			count_all_meals++;
 		i++;
 	}
