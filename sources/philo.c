@@ -38,10 +38,8 @@ static int	check_arg(char **argv)
 
 int	main(int argc, char **argv)
 {
-	int		i;
 	t_data	data;
 
-	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
 		if (check_arg(argv))

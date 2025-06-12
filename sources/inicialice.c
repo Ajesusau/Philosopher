@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:52:06 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/11 19:24:00 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:10:30 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ void	ini_fork(t_data *data)
 
 int	init_data(char **argv, t_data *data)
 {
-	int	i;
-
-	i = 0;
 	data->time_to_die = ft_atoll(argv[2]);
 	data->time_to_eat = ft_atoll(argv[3]);
 	data->time_to_sleep = ft_atoll(argv[4]);
