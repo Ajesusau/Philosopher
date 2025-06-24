@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/12 15:06:04 by anareval         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:22:09 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ void	*start_philo(void *var)
 	while (!is_philo_dead(philo->data) && !all_meals(philo->data))
 	{
 		ft_eat(philo);
-		if (!is_philo_dead(philo->data) && !all_meals(philo->data))
-			ft_sleep(philo);
-		if (!is_philo_dead(philo->data) && !all_meals(philo->data))
-			ft_think(philo);
+		if (is_philo_dead(philo->data) || all_meals(philo->data))
+			break ;
+		ft_sleep(philo);
+		if (is_philo_dead(philo->data) || all_meals(philo->data))
+			break ;
+		ft_think(philo);
 	}
 	return (NULL);
 }
