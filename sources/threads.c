@@ -6,7 +6,7 @@
 /*   By: anareval <anareval@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 12:55:52 by anareval          #+#    #+#             */
-/*   Updated: 2025/06/24 19:22:09 by anareval         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:19:27 by anareval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	all_meals(t_data *data)
 	int	count_all_meals;
 	int	meals_count;
 
+	if (data->philos_must_eat == -1)
+		return (0);
 	i = 0;
 	count_all_meals = 0;
 	while (i < data->num_of_philos)
@@ -61,7 +63,7 @@ void	*start_god(void *var)
 			last_meal_time = get_current_time() - data->philos[i].last_meal;
 			pthread_mutex_unlock(&data->philos[i].eat_mutex);
 			if (last_meal_time >= data->time_to_die
-				&& data->philos[i].meals_count != data->philos_must_eat)
+				&& (data->philos[i].meals_count != data->philos_must_eat))
 			{
 				is_dead(data, i);
 				break ;
