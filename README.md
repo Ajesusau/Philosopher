@@ -1,10 +1,10 @@
-# 🍝 philosophers
+#  philosophers
 
 **philosophers** es un proyecto de [42 School](https://42.fr) cuyo objetivo es simular el clásico **problema de los filósofos comensales**.  
 El reto consiste en gestionar correctamente múltiples procesos o hilos que compiten por recursos limitados (los tenedores), evitando **condiciones de carrera**, **interbloqueos** y **hambre**.
 
 
-## 🧠 Objetivos del Proyecto
+##  Objetivos del Proyecto
 
 - Comprender problemas de concurrencia y sincronización en sistemas.  
 - Aprender a trabajar con **threads** (`pthread`) y **mutex**.  
@@ -13,7 +13,7 @@ El reto consiste en gestionar correctamente múltiples procesos o hilos que comp
 - Reforzar la importancia de la programación determinista y segura en entornos paralelos.  
 
 
-## ✅ Funcionalidades Implementadas
+##  Funcionalidades Implementadas
 
 - Simulación del comportamiento de cada filósofo como un **thread independiente**.  
 - Uso de **mutex** para proteger los recursos (tenedores).  
@@ -26,7 +26,7 @@ El reto consiste en gestionar correctamente múltiples procesos o hilos que comp
 - Opción de configurar el número de veces que debe comer cada filósofo.  
 
 
-## 🛠️ Ejecución
+##  Ejecución
 
 Compilar el programa con:
 ```
@@ -40,7 +40,7 @@ Ejemplo:
 ```
 ./philo 5 800 200 200
 ```
-📌 Simula 5 filósofos, cada uno muere si pasa 800 ms sin comer, tardan 200 ms en comer y 200 ms en dormir.
+ Simula 5 filósofos, cada uno muere si pasa 800 ms sin comer, tardan 200 ms en comer y 200 ms en dormir.
 
 Ejemplo con número de comidas:
 ```
