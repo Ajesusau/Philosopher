@@ -46,4 +46,4 @@ Ejemplo con número de comidas:
 ```
 ./philo 5 800 200 200 7
 ```
-📌 La simulación termina cuando cada filósofo ha comido 7 veces.
+ La simulación termina cuando cada filósofo ha comido 7 veces.
